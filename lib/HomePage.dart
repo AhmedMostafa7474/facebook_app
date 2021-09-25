@@ -7,6 +7,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 
 import 'Controllers/PostsController.dart';
+import 'Models/Stories.dart';
 
 class homepage extends StatefulWidget {
   double websize;
@@ -281,27 +282,21 @@ class _homepageState extends State<homepage> {
   SizedBox StoriesSection() {
     return SizedBox(
       height: isDesktop(context)?400*websize:200,
-      child: GridView.builder(
-              physics: NeverScrollableScrollPhysics(),
+      child: ListView.builder(
               shrinkWrap: true,
-              itemCount: 4,
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: 4,
-                crossAxisSpacing: 3,
-                mainAxisSpacing: 4,
-                childAspectRatio: 0.5*websize,
-              ),
+              itemCount: Stories.length,
+              scrollDirection: Axis.horizontal,
               itemBuilder: (BuildContext context, int index) {
                 return Stack(
                   children: [
                     Container(
                       height: 400*websize,
-                      width: 200,
+                      width: 150,
                       margin: EdgeInsets.all(6.0),
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(8.0),
                         image: DecorationImage(
-                          image: AssetImage(contacts[index].img),
+                          image: AssetImage(Stories[index].StoryPhoto),
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -314,7 +309,7 @@ class _homepageState extends State<homepage> {
                           border: Border.all(color: Colors.blue,width: 2.5)
                         ),
                         child: CircleAvatar(
-                          backgroundImage: AssetImage(contacts[index].img),
+                          backgroundImage: AssetImage(Stories[index].userPhoto),
                         maxRadius: 16,
                         ),
                       ),
